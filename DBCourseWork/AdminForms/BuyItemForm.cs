@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace DBCourseWork
+namespace DBCourseWork.AdminForms
 {
     public partial class BuyItemForm : Form
     {
@@ -10,6 +10,11 @@ namespace DBCourseWork
         {
             _context = context;
             InitializeComponent();
+        }
+
+        private void exitBtn_Click(object sender, System.EventArgs e)
+        {
+            Close();
         }
     }
 }

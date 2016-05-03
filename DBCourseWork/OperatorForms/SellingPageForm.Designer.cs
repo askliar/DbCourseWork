@@ -1,4 +1,4 @@
-﻿namespace DBCourseWork
+﻿namespace DBCourseWork.OperatorForms
 {
     partial class SellingPageForm
     {
@@ -101,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 161);
+            this.ClientSize = new System.Drawing.Size(434, 165);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.sellBtn);
             this.Controls.Add(this.totalPrice_lbl);
@@ -109,7 +109,11 @@
             this.Controls.Add(this.actiontxt);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.itemstxt);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SellingPageForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sell Items";
             this.ResumeLayout(false);
             this.PerformLayout();

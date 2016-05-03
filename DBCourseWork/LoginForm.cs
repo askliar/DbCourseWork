@@ -2,6 +2,8 @@
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
+using DBCourseWork.AdminForms;
+using DBCourseWork.OperatorForms;
 
 namespace DBCourseWork
 {
@@ -54,7 +56,6 @@ namespace DBCourseWork
             {
                 MessageBox.Show(
                     @"Error ocurred during connection! Check your login and password or contact your administrator!");
-                throw;
             }
         }
 

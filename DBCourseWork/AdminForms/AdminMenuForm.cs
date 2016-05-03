@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace DBCourseWork
+namespace DBCourseWork.AdminForms
 {
     public partial class AdminMenuForm : Form
     {
@@ -15,35 +14,39 @@ namespace DBCourseWork
 
         private void contrLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //var form = new Register
-            //Hide();
-            //form.Closed += (s, args) => Close();
-            //form.Show();
+            var form = new AddContractorForm(_context);
+            Hide();
+            form.ShowDialog();
+            this.Show();
         }
 
         private void itemLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            var form = new AddItemForm(_context);
+            Hide();
+            form.ShowDialog();
+            this.Show();
         }
 
         private void deleteLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = new DebitItemForm(_context);
             Hide();
-            form.Closed += (s, args) => Close();
-            form.Show();
+            form.ShowDialog();
+            this.Show();
         }
 
         private void goodsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = new BuyItemForm(_context);
             Hide();
-            form.Closed += (s, args) => Close();
-            form.Show();
+            form.ShowDialog();
+            this.Show();
         }
 
         private void exitBtn_Click(object sender, System.EventArgs e)
         {
+            _context.Dispose();
             Close();
         }
     }

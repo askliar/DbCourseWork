@@ -1,12 +1,12 @@
 ﻿using System.Windows.Forms;
 
-namespace DBCourseWork
+namespace DBCourseWork.OperatorForms
 {
-    public partial class DebitItemForm : Form
+    public partial class SellerMenuForm : Form
     {
         private readonly ApplicationDbContext _context;
 
-        public DebitItemForm(ApplicationDbContext context)
+        public SellerMenuForm(ApplicationDbContext context)
         {
             _context = context;
             InitializeComponent();

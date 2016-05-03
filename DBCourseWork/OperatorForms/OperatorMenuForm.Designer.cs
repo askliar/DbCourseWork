@@ -1,4 +1,4 @@
-﻿namespace DBCourseWork
+﻿namespace DBCourseWork.OperatorForms
 {
     partial class SellerMenuForm
     {
@@ -72,7 +72,11 @@
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.cardLink);
             this.Controls.Add(this.sellLink);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SellerMenuForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main Menu";
             this.ResumeLayout(false);
             this.PerformLayout();

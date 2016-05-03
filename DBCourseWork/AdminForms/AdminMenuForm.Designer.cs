@@ -1,4 +1,4 @@
-﻿namespace DBCourseWork
+﻿namespace DBCourseWork.AdminForms
 {
     partial class AdminMenuForm
     {
@@ -103,7 +103,11 @@
             this.Controls.Add(this.itemLink);
             this.Controls.Add(this.contrLink);
             this.Controls.Add(this.exitBtn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AdminMenuForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminMenuForm";
             this.ResumeLayout(false);
             this.PerformLayout();
