@@ -112,6 +112,12 @@
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\PersonalSkill.cs" />
     <Compile Include="Entities\Position.cs" />
+    <Compile Include="OperatorForms\AddActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorForms\AddActionForm.Designer.cs">
+      <DependentUpon>AddActionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OperatorForms\OperatorMenuForm.cs">
@@ -149,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorForms\AddActionForm.resx">
+      <DependentUpon>AddActionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

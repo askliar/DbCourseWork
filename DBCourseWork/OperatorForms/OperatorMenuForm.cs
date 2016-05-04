@@ -11,5 +11,13 @@ namespace DBCourseWork.OperatorForms
             _context = context;
             InitializeComponent();
         }
+
+        private void cardLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var form = new AddActionForm(_context);
+            Hide();
+            form.ShowDialog();
+            this.Show();
+        }
     }
 }

@@ -54,6 +54,7 @@
             this.cardLink.TabIndex = 1;
             this.cardLink.TabStop = true;
             this.cardLink.Text = "2. Register Card";
+            this.cardLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cardLink_LinkClicked);
             // 
             // exitBtn
             // 
