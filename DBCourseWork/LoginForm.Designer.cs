@@ -38,7 +38,7 @@
             // 
             // logintxt
             // 
-            this.logintxt.Location = new System.Drawing.Point(128, 13);
+            this.logintxt.Location = new System.Drawing.Point(128, 17);
             this.logintxt.Name = "logintxt";
             this.logintxt.Size = new System.Drawing.Size(258, 20);
             this.logintxt.TabIndex = 0;
@@ -57,42 +57,45 @@
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(174, 23);
             this.loginBtn.TabIndex = 2;
-            this.loginBtn.Text = "Login";
+            this.loginBtn.Text = "Увійти в систему";
             this.loginBtn.UseVisualStyleBackColor = true;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
             // exitBtn
             // 
+            this.exitBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.exitBtn.Location = new System.Drawing.Point(206, 104);
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(180, 23);
             this.exitBtn.TabIndex = 3;
-            this.exitBtn.Text = "Exit";
+            this.exitBtn.Text = "Вийти";
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 20);
+            this.label1.Location = new System.Drawing.Point(10, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 13);
+            this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Enter your code:";
+            this.label1.Text = "Введіть ваш логін:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 63);
+            this.label2.Location = new System.Drawing.Point(10, 59);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 13);
+            this.label2.Size = new System.Drawing.Size(110, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Enter your password:";
+            this.label2.Text = "Введіть ваш пароль:";
             // 
             // LoginForm
             // 
+            this.AcceptButton = this.loginBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.exitBtn;
             this.ClientSize = new System.Drawing.Size(398, 139);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -105,7 +108,7 @@
             this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "LoginForm";
+            this.Text = "Форма Входу";
             this.ResumeLayout(false);
             this.PerformLayout();
 

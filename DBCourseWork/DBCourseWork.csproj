@@ -99,9 +99,9 @@
     <Compile Include="Entities\Documentation.cs" />
     <Compile Include="Entities\EntityContr.cs" />
     <Compile Include="Entities\Good.cs" />
-    <Compile Include="Entities\GoodInfo.cs" />
     <Compile Include="Entities\GoodsMove.cs" />
     <Compile Include="Entities\IndividContr.cs" />
+    <Compile Include="Entities\GoodInfo.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

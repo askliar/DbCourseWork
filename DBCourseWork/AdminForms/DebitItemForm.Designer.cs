@@ -34,20 +34,22 @@
             this.exitBtn = new System.Windows.Forms.Button();
             this.sellBtn = new System.Windows.Forms.Button();
             this.itemsCombobox = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.contrCombobox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 55);
+            this.label2.Location = new System.Drawing.Point(12, 75);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 13);
+            this.label2.Size = new System.Drawing.Size(93, 13);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Количество товара:";
+            this.label2.Text = "Кількість товару:";
             // 
             // quantityTxt
             // 
-            this.quantityTxt.Location = new System.Drawing.Point(128, 52);
+            this.quantityTxt.Location = new System.Drawing.Point(128, 72);
             this.quantityTxt.Name = "quantityTxt";
             this.quantityTxt.Size = new System.Drawing.Size(294, 20);
             this.quantityTxt.TabIndex = 6;
@@ -57,27 +59,27 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Items Name:";
+            this.label1.Text = "Назва товару:";
             // 
             // exitBtn
             // 
-            this.exitBtn.Location = new System.Drawing.Point(255, 89);
+            this.exitBtn.Location = new System.Drawing.Point(255, 105);
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(167, 23);
             this.exitBtn.TabIndex = 9;
-            this.exitBtn.Text = "Exit to Menu";
+            this.exitBtn.Text = "Вийти в Меню";
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
             // sellBtn
             // 
-            this.sellBtn.Location = new System.Drawing.Point(15, 89);
+            this.sellBtn.Location = new System.Drawing.Point(15, 105);
             this.sellBtn.Name = "sellBtn";
             this.sellBtn.Size = new System.Drawing.Size(167, 23);
             this.sellBtn.TabIndex = 8;
-            this.sellBtn.Text = "Sell";
+            this.sellBtn.Text = "Списати";
             this.sellBtn.UseVisualStyleBackColor = true;
             this.sellBtn.Click += new System.EventHandler(this.sellBtn_Click);
             // 
@@ -90,12 +92,32 @@
             this.itemsCombobox.Name = "itemsCombobox";
             this.itemsCombobox.Size = new System.Drawing.Size(294, 21);
             this.itemsCombobox.TabIndex = 10;
+            this.itemsCombobox.SelectedIndexChanged += new System.EventHandler(this.itemsCombobox_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(68, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Контрагент:";
+            // 
+            // contrCombobox
+            // 
+            this.contrCombobox.FormattingEnabled = true;
+            this.contrCombobox.Location = new System.Drawing.Point(128, 42);
+            this.contrCombobox.Name = "contrCombobox";
+            this.contrCombobox.Size = new System.Drawing.Size(294, 21);
+            this.contrCombobox.TabIndex = 12;
             // 
             // DebitItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 118);
+            this.ClientSize = new System.Drawing.Size(434, 139);
+            this.Controls.Add(this.contrCombobox);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.itemsCombobox);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.sellBtn);
@@ -107,7 +129,7 @@
             this.MinimizeBox = false;
             this.Name = "DebitItemForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DebitItemForm";
+            this.Text = "Списати Товар";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,5 +143,7 @@
         private System.Windows.Forms.Button exitBtn;
         private System.Windows.Forms.Button sellBtn;
         private System.Windows.Forms.ComboBox itemsCombobox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox contrCombobox;
     }
 }

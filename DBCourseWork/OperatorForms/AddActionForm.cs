@@ -15,10 +15,12 @@ namespace DBCourseWork.OperatorForms
 {
     public partial class AddActionForm : Form
     {
-        public readonly ApplicationDbContext _context;
+        private readonly UserRole _userRole;
+        private readonly ApplicationDbContext _context;
 
-        public AddActionForm(ApplicationDbContext context)
+        public AddActionForm(ApplicationDbContext context, UserRole user)
         {
+            _userRole = user;
             _context = context;
             InitializeComponent();
             var entityContractors = _context.EntityContrs.ToList();
@@ -26,7 +28,7 @@ namespace DBCourseWork.OperatorForms
             foreach (var individContractor in individContractors)
             {
                 contrCombobox.Items.Add(
-                    $"{individContractor.Contractor.ContrName} :-: {individContractor.Contractor.Address} :-: {individContractor.Birthday}");
+                    $"{individContractor.Contractor.ContrName} :-: {individContractor.Contractor.Address} :-: {individContractor.Birthday.ToString("dd/MM/yyyy")}");
             }
             foreach (var entityContractor in entityContractors)
             {
@@ -46,13 +48,14 @@ namespace DBCourseWork.OperatorForms
         {
             try
             {
+                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person == _userRole.Person);
                 double percent;
                 if (!double.TryParse(discountTxt.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out percent))
                 {
                     throw new Exception("The entered discount value is wrong!");
                 }
                 var startDate = startDatePicker.Value;
-                var endDate = startDatePicker.Value;
+                var endDate = endDatePicker.Value;
                 if (startDate > DateTime.Now || startDate < DateTime.Parse("01.01.1900") || endDate <= DateTime.Now ||
                     endDate >= DateTime.Now.AddYears(5) || percent > 100)
                 {
@@ -71,25 +74,40 @@ namespace DBCourseWork.OperatorForms
                 {
                     throw new Exception("Choose the contractor!");
                 }
-                //var contractorName = contractorData.Take();
                 var firstIndex = contractorData.IndexOf(" :-: ", StringComparison.Ordinal);
                 var lastIndex = contractorData.LastIndexOf(" :-: ", StringComparison.Ordinal);
                 var contractorName = contractorData.Substring(0, firstIndex);
-                var contractorAddress = contractorData.Substring(firstIndex + 5, lastIndex);
+                var contractorAddress = contractorData.Substring(firstIndex + 5, lastIndex - firstIndex - 5);
                 var contractorDetails = contractorData.Substring(lastIndex + 5);
                 DateTime date;
                 if (DateTime.TryParse(contractorDetails, out date))
                 {
-                    var contractor =
-                        _context.Contractors.FirstOrDefault(
+                    var individContr =
+                        _context.IndividContrs.FirstOrDefault(
                             contr =>
-                                contr.ContrName == contractorName && contr.Address == contractorAddress);
-                    var individContr = _context.IndividContrs.FirstOrDefault(contr => contr.Contractor == contractor && contr.Birthday == date);
-                    if (individContr != null) individContr.Contractor.Card = card;
-                    _context.IndividContrs.Add(individContr);
-                    _context.SaveChanges();
-                    MessageBox.Show(@"Changes saved succesfully!");
-                    Utilities.ClearSpace(this);
+                                contr.Contractor.ContrName == contractorName &&
+                                contr.Contractor.Address == contractorAddress && contr.Birthday == date);
+                    if (individContr != null)
+                    {
+                        individContr.Contractor.Card = card;
+                        _context.IndividContrs.Add(individContr);
+                        _context.Actions.Add(action);
+                        _context.Cards.Add(card);
+                        _context.Documentations.Add(new Documentation
+                        {
+                            Contractor = individContr.Contractor,
+                            Stuff = stuff,
+                            DocDate = DateTime.Now,
+                            DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterCard"),
+                        });
+                        _context.SaveChanges();
+                        MessageBox.Show(@"Changes saved succesfully!");
+                        Utilities.ClearSpace(this);
+                    }
+                    else
+                    {
+                        throw new Exception("There is no such contractor!");
+                    }
                 }
                 else
                 {
@@ -100,18 +118,33 @@ namespace DBCourseWork.OperatorForms
                     var entityContr =
                         _context.EntityContrs.FirstOrDefault(
                             contr => contr.Contractor == contractor && contr.StateNumber == contractorDetails);
-                    if (entityContr != null) entityContr.Contractor.Card = card;
-                    _context.EntityContrs.Add(entityContr);
-                    _context.SaveChanges();
-                    MessageBox.Show(@"Changes saved succesfully!");
-                    Utilities.ClearSpace(this);
+                    if (entityContr != null)
+                    {
+                        entityContr.Contractor.Card = card;
+                        _context.EntityContrs.Add(entityContr);
+                        _context.Actions.Add(action);
+                        _context.Cards.Add(card);
+                        _context.Documentations.Add(new Documentation
+                        {
+                            Contractor = entityContr.Contractor,
+                            Stuff = stuff,
+                            DocDate = DateTime.Now,
+                            DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterCard"),
+                        });
+                        _context.SaveChanges();
+                        MessageBox.Show(@"Changes saved succesfully!");
+                        Utilities.ClearSpace(this);
+                    }
+                    else
+                    {
+                        throw new Exception("There is no such contractor!");
+                    }
                 }
             }
             catch (Exception)
             {
                 MessageBox.Show(@"Check the entered information!");
             }
-
         }
     }
 }

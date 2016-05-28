@@ -8,9 +8,11 @@ namespace DBCourseWork.AdminForms
     public partial class AddContractorForm : Form
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserRole _userRole;
 
-        public AddContractorForm(ApplicationDbContext context)
+        public AddContractorForm(ApplicationDbContext context, UserRole user)
         {
+            _userRole = user;
             _context = context;
             InitializeComponent();
             entityRadio.Checked = true;
@@ -42,6 +44,7 @@ namespace DBCourseWork.AdminForms
             {
                 var birthday = birthDatePicker.Value;
                 var phone = phoneTxt.Text;
+                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person == _userRole.Person);
                 if (birthday > DateTime.Now || birthday < DateTime.Parse("01.01.1900"))
                 {
                     throw new Exception();
@@ -67,6 +70,13 @@ namespace DBCourseWork.AdminForms
                         StateNumber = registrationNumTxt.Text
                     };
                     _context.EntityContrs.Add(entityContractor);
+                    _context.Documentations.Add(new Documentation
+                    {
+                        Stuff = stuff,
+                        DocDate = DateTime.Now,
+                        DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterContractor"),
+                        Contractor = entityContractor.Contractor
+                    });
                     _context.SaveChanges();
                     MessageBox.Show(@"Changes saved succesfully!");
                     Utilities.ClearSpace(this);
@@ -78,6 +88,13 @@ namespace DBCourseWork.AdminForms
                         Birthday = birthday
                     };
                     _context.IndividContrs.Add(individContr);
+                    _context.Documentations.Add(new Documentation
+                    {
+                        Stuff = stuff,
+                        DocDate = DateTime.Now,
+                        DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterContractor"),
+                        Contractor = individContr.Contractor
+                    });
                     _context.SaveChanges();
                     MessageBox.Show(@"Changes saved succesfully!");
                     Utilities.ClearSpace(this);

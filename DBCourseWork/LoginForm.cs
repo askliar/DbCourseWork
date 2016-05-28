@@ -31,7 +31,7 @@ namespace DBCourseWork
                         {
                             var form =
                                 new AdminMenuForm(
-                                    new ApplicationDbContext(Utilities.ConnectionStringBuilder("admin", "admin")));
+                                    new ApplicationDbContext(Utilities.ConnectionStringBuilder("admin", "admin")), user);
                             Hide();
                             form.Closed += (s, args) => Close();
                             form.Show();
@@ -40,7 +40,7 @@ namespace DBCourseWork
                         {
                             var form =
                                 new SellerMenuForm(
-                                    new ApplicationDbContext(Utilities.ConnectionStringBuilder("operator", "operator")));
+                                    new ApplicationDbContext(Utilities.ConnectionStringBuilder("operator", "operator")), user);
                             Hide();
                             form.Closed += (s, args) => Close();
                             form.Show();

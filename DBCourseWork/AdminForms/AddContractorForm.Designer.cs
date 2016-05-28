@@ -50,11 +50,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 90);
+            this.label3.Location = new System.Drawing.Point(9, 90);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.Size = new System.Drawing.Size(96, 13);
             this.label3.TabIndex = 23;
-            this.label3.Text = "Phone number:";
+            this.label3.Text = "Номер телефона:";
             // 
             // exitBtn
             // 
@@ -62,7 +62,7 @@
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(167, 23);
             this.exitBtn.TabIndex = 21;
-            this.exitBtn.Text = "Exit to Menu";
+            this.exitBtn.Text = "Вийти в Меню";
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
@@ -72,27 +72,27 @@
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(167, 23);
             this.addBtn.TabIndex = 20;
-            this.addBtn.Text = "Add Contractor";
+            this.addBtn.Text = "Додати Контрагента";
             this.addBtn.UseVisualStyleBackColor = true;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 15);
+            this.label2.Location = new System.Drawing.Point(9, 11);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 13);
+            this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Contractor name:";
+            this.label2.Text = "Назва контрагента:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 52);
+            this.label1.Location = new System.Drawing.Point(9, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 18;
-            this.label1.Text = "Contragent address:";
+            this.label1.Text = "Адреса контрагента:";
             // 
             // addressTxt
             // 
@@ -120,10 +120,10 @@
             this.individRadio.AutoSize = true;
             this.individRadio.Location = new System.Drawing.Point(6, 19);
             this.individRadio.Name = "individRadio";
-            this.individRadio.Size = new System.Drawing.Size(122, 17);
+            this.individRadio.Size = new System.Drawing.Size(100, 17);
             this.individRadio.TabIndex = 27;
             this.individRadio.TabStop = true;
-            this.individRadio.Text = "Individual Contractor";
+            this.individRadio.Text = "Фізична особа";
             this.individRadio.UseVisualStyleBackColor = true;
             this.individRadio.CheckedChanged += new System.EventHandler(this.individRadio_CheckedChanged);
             // 
@@ -132,10 +132,10 @@
             this.entityRadio.AutoSize = true;
             this.entityRadio.Location = new System.Drawing.Point(6, 42);
             this.entityRadio.Name = "entityRadio";
-            this.entityRadio.Size = new System.Drawing.Size(103, 17);
+            this.entityRadio.Size = new System.Drawing.Size(108, 17);
             this.entityRadio.TabIndex = 28;
             this.entityRadio.TabStop = true;
-            this.entityRadio.Text = "Entity Contractor";
+            this.entityRadio.Text = "Юридична особа";
             this.entityRadio.UseVisualStyleBackColor = true;
             this.entityRadio.CheckedChanged += new System.EventHandler(this.entityRadio_CheckedChanged);
             // 
@@ -152,29 +152,29 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 122);
+            this.label4.Location = new System.Drawing.Point(9, 132);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(138, 13);
+            this.label4.Size = new System.Drawing.Size(135, 13);
             this.label4.TabIndex = 30;
-            this.label4.Text = "Choose the contractor type:";
+            this.label4.Text = "Оберіть тип контрагента:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(12, 193);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 13);
+            this.label5.Size = new System.Drawing.Size(101, 13);
             this.label5.TabIndex = 31;
-            this.label5.Text = "Birth Date:";
+            this.label5.Text = "Дата народження:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(12, 227);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.Size = new System.Drawing.Size(119, 13);
             this.label6.TabIndex = 32;
-            this.label6.Text = "Registration number:";
+            this.label6.Text = "Реєстраційний номер:";
             // 
             // birthDatePicker
             // 
@@ -214,7 +214,7 @@
             this.MinimizeBox = false;
             this.Name = "AddContractorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddContractorForm";
+            this.Text = "Додати Контрагента";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

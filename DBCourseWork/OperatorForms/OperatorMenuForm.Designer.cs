@@ -39,10 +39,10 @@
             this.sellLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.sellLink.Location = new System.Drawing.Point(12, 9);
             this.sellLink.Name = "sellLink";
-            this.sellLink.Size = new System.Drawing.Size(129, 25);
+            this.sellLink.Size = new System.Drawing.Size(187, 25);
             this.sellLink.TabIndex = 0;
             this.sellLink.TabStop = true;
-            this.sellLink.Text = "1. Sell Items";
+            this.sellLink.Text = "1. Продати Товар";
             // 
             // cardLink
             // 
@@ -50,26 +50,29 @@
             this.cardLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cardLink.Location = new System.Drawing.Point(12, 58);
             this.cardLink.Name = "cardLink";
-            this.cardLink.Size = new System.Drawing.Size(168, 25);
+            this.cardLink.Size = new System.Drawing.Size(261, 25);
             this.cardLink.TabIndex = 1;
             this.cardLink.TabStop = true;
-            this.cardLink.Text = "2. Register Card";
+            this.cardLink.Text = "2. Зареєструвати Картку";
             this.cardLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cardLink_LinkClicked);
             // 
             // exitBtn
             // 
+            this.exitBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.exitBtn.Location = new System.Drawing.Point(17, 113);
             this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(230, 23);
+            this.exitBtn.Size = new System.Drawing.Size(243, 23);
             this.exitBtn.TabIndex = 2;
-            this.exitBtn.Text = "Exit";
+            this.exitBtn.Text = "Вийти";
             this.exitBtn.UseVisualStyleBackColor = true;
+            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
             // SellerMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(259, 143);
+            this.CancelButton = this.exitBtn;
+            this.ClientSize = new System.Drawing.Size(272, 143);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.cardLink);
             this.Controls.Add(this.sellLink);
@@ -78,7 +81,7 @@
             this.MinimizeBox = false;
             this.Name = "SellerMenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Main Menu";
+            this.Text = "Меню Оператора";
             this.ResumeLayout(false);
             this.PerformLayout();
 

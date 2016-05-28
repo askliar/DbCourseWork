@@ -44,7 +44,7 @@
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(167, 23);
             this.exitBtn.TabIndex = 13;
-            this.exitBtn.Text = "Exit to Menu";
+            this.exitBtn.Text = "Вийти в Меню";
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
@@ -54,35 +54,36 @@
             this.buyBtn.Name = "buyBtn";
             this.buyBtn.Size = new System.Drawing.Size(167, 23);
             this.buyBtn.TabIndex = 12;
-            this.buyBtn.Text = "Buy";
+            this.buyBtn.Text = "Закупити";
             this.buyBtn.UseVisualStyleBackColor = true;
+            this.buyBtn.Click += new System.EventHandler(this.buyBtn_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(26, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 13);
+            this.label2.Size = new System.Drawing.Size(96, 13);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Contractor name:";
+            this.label2.Text = "Ім\'я Контрагента:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 15);
+            this.label1.Location = new System.Drawing.Point(26, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Item Name:";
+            this.label1.Text = "Назва Товару:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(26, 93);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 15;
-            this.label3.Text = "Quantity:";
+            this.label3.Text = "Кількість:";
             // 
             // qunatityTxt
             // 
@@ -129,7 +130,7 @@
             this.MinimizeBox = false;
             this.Name = "BuyItemForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "BuyItemForm";
+            this.Text = "Закупка Товару";
             this.ResumeLayout(false);
             this.PerformLayout();
 

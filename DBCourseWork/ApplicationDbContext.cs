@@ -212,6 +212,30 @@ namespace DBCourseWork
             modelBuilder.Entity<UserRole>()
                 .Property(e => e.Role)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<GoodInfo>()
+                .Property(e => e.GoodName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GoodInfo>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GoodInfo>()
+                .Property(e => e.ISBN)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GoodInfo>()
+                .Property(e => e.ContrName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GoodInfo>()
+                .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GoodInfo>()
+                .Property(e => e.Address)
+                .IsUnicode(false);
         }
     }
 }

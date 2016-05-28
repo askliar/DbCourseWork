@@ -15,9 +15,11 @@ namespace DBCourseWork.AdminForms
     public partial class AddItemForm : Form
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserRole _userRole;
 
-        public AddItemForm(ApplicationDbContext context)
+        public AddItemForm(ApplicationDbContext context, UserRole user)
         {
+            _userRole = user;
             _context = context;
             InitializeComponent();
             otherRadio.Checked = true;
@@ -52,6 +54,7 @@ namespace DBCourseWork.AdminForms
             {
                 double price;
                 int term;
+                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person == _userRole.Person);
                 if (!double.TryParse(priceTxt.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out price) || !int.TryParse(termTxt.Text, out term))
                 {
                     throw new Exception();
@@ -78,6 +81,13 @@ namespace DBCourseWork.AdminForms
                         Year = year
                     };
                     _context.Books.Add(book);
+                    _context.Documentations.Add(new Documentation
+                    {
+                        Stuff = stuff,
+                        DocDate = DateTime.Now,
+                        DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterItem"),
+                        
+                    });
                     _context.SaveChanges();
                     MessageBox.Show(@"Changes saved succesfully!");
                     Utilities.ClearSpace(this);
