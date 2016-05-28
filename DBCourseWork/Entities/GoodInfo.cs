@@ -1,13 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace DBCourseWork
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     [Table("Sklyar_A.GoodInfo")]
-    public partial class GoodInfo
+    public class GoodInfo
     {
         [Key]
         [Column(Order = 0)]

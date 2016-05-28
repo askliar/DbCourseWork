@@ -12,7 +12,7 @@ namespace DBCourseWork
 
         public ApplicationDbContext(string connectionString)
         {
-            this.Database.Connection.ConnectionString = connectionString;
+            Database.Connection.ConnectionString = connectionString;
         }
 
         public virtual DbSet<Absence> Absences { get; set; }

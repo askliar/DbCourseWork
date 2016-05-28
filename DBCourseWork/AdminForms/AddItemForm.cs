@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBCourseWork.Entities;
 
@@ -54,10 +48,10 @@ namespace DBCourseWork.AdminForms
             {
                 double price;
                 int term;
-                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person == _userRole.Person);
+                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person.IdPerson == _userRole.Person.IdPerson);
                 if (!double.TryParse(priceTxt.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out price) || !int.TryParse(termTxt.Text, out term))
                 {
-                    throw new Exception();
+                    throw new Exception("Перевірте правильність введених ціни та строку придатності!");
                 }
                 var good = new Good
                 {
@@ -85,29 +79,28 @@ namespace DBCourseWork.AdminForms
                     {
                         Stuff = stuff,
                         DocDate = DateTime.Now,
-                        DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterItem"),
+                        DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterItem")
                         
                     });
                     _context.SaveChanges();
-                    MessageBox.Show(@"Changes saved succesfully!");
+                    MessageBox.Show(@"Дані були успішно збережені!");
                     Utilities.ClearSpace(this);
                 }
                 else if (otherRadio.Checked)
                 {
                     _context.Goods.Add(good);
                     _context.SaveChanges();
-                    MessageBox.Show(@"Changes saved succesfully!");
+                    MessageBox.Show(@"Дані були успішно збережені!");
                     Utilities.ClearSpace(this);
                 }
                 else
                 {
-                    MessageBox.Show(@"Choose the type of item!");
+                   throw new Exception("Оберіть тип товару!");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show(@"Check the entered information!");
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

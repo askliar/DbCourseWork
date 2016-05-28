@@ -1,11 +1,14 @@
-﻿namespace DBCourseWork.AdminForms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace DBCourseWork.AdminForms
 {
     partial class AddContractorForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -223,21 +226,21 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button exitBtn;
-        private System.Windows.Forms.Button addBtn;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox addressTxt;
-        private System.Windows.Forms.TextBox nameTxt;
-        private System.Windows.Forms.TextBox phoneTxt;
-        private System.Windows.Forms.RadioButton individRadio;
-        private System.Windows.Forms.RadioButton entityRadio;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker birthDatePicker;
-        private System.Windows.Forms.TextBox registrationNumTxt;
+        private Label label3;
+        private Button exitBtn;
+        private Button addBtn;
+        private Label label2;
+        private Label label1;
+        private TextBox addressTxt;
+        private TextBox nameTxt;
+        private TextBox phoneTxt;
+        private RadioButton individRadio;
+        private RadioButton entityRadio;
+        private GroupBox groupBox1;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private DateTimePicker birthDatePicker;
+        private TextBox registrationNumTxt;
     }
 }

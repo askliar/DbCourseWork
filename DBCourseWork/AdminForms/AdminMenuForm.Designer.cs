@@ -1,11 +1,14 @@
-﻿namespace DBCourseWork.AdminForms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace DBCourseWork.AdminForms
 {
     partial class AdminMenuForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -116,10 +119,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button exitBtn;
-        private System.Windows.Forms.LinkLabel contrLink;
-        private System.Windows.Forms.LinkLabel itemLink;
-        private System.Windows.Forms.LinkLabel deleteLink;
-        private System.Windows.Forms.LinkLabel goodsLink;
+        private Button exitBtn;
+        private LinkLabel contrLink;
+        private LinkLabel itemLink;
+        private LinkLabel deleteLink;
+        private LinkLabel goodsLink;
     }
 }

@@ -1,11 +1,14 @@
-﻿namespace DBCourseWork.OperatorForms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace DBCourseWork.OperatorForms
 {
     partial class AddActionForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -158,15 +161,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox contrCombobox;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button exitBtn;
-        private System.Windows.Forms.Button addActionBtn;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker startDatePicker;
-        private System.Windows.Forms.DateTimePicker endDatePicker;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox discountTxt;
+        private ComboBox contrCombobox;
+        private Label label3;
+        private Button exitBtn;
+        private Button addActionBtn;
+        private Label label2;
+        private DateTimePicker startDatePicker;
+        private DateTimePicker endDatePicker;
+        private Label label4;
+        private Label label5;
+        private TextBox discountTxt;
     }
 }

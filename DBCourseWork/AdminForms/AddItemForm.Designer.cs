@@ -1,11 +1,14 @@
-﻿namespace DBCourseWork.AdminForms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace DBCourseWork.AdminForms
 {
     partial class AddItemForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -275,26 +278,26 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox termTxt;
-        private System.Windows.Forms.TextBox itemNameTxt;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button exitBtn;
-        private System.Windows.Forms.Button addBtn;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton bookRadio;
-        private System.Windows.Forms.RadioButton otherRadio;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox authorTxt;
-        private System.Windows.Forms.TextBox nameTxt;
-        private System.Windows.Forms.TextBox publishTxt;
-        private System.Windows.Forms.TextBox isbnTxt;
-        private System.Windows.Forms.TextBox priceTxt;
-        private System.Windows.Forms.Label label2;
+        private TextBox termTxt;
+        private TextBox itemNameTxt;
+        private Label label3;
+        private Button exitBtn;
+        private Button addBtn;
+        private Label label1;
+        private RadioButton bookRadio;
+        private RadioButton otherRadio;
+        private Label label4;
+        private GroupBox groupBox1;
+        private Label label7;
+        private Label label5;
+        private Label label6;
+        private Label label9;
+        private Label label10;
+        private TextBox authorTxt;
+        private TextBox nameTxt;
+        private TextBox publishTxt;
+        private TextBox isbnTxt;
+        private TextBox priceTxt;
+        private Label label2;
     }
 }

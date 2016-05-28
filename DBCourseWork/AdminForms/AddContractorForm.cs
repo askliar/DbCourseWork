@@ -19,45 +19,45 @@ namespace DBCourseWork.AdminForms
             birthDatePicker.Enabled = false;
         }
 
-        private void exitBtn_Click(object sender, System.EventArgs e)
+        private void exitBtn_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void individRadio_CheckedChanged(object sender, System.EventArgs e)
+        private void individRadio_CheckedChanged(object sender, EventArgs e)
         {
             entityRadio.Checked = !individRadio.Checked;
             birthDatePicker.Enabled = individRadio.Checked;
             registrationNumTxt.Enabled = entityRadio.Checked;
         }
 
-        private void entityRadio_CheckedChanged(object sender, System.EventArgs e)
+        private void entityRadio_CheckedChanged(object sender, EventArgs e)
         {
             individRadio.Checked = !entityRadio.Checked;
             birthDatePicker.Enabled = individRadio.Checked;
             registrationNumTxt.Enabled = entityRadio.Checked;
         }
 
-        private void addBtn_Click(object sender, System.EventArgs e)
+        private void addBtn_Click(object sender, EventArgs e)
         {
             try
             {
                 var birthday = birthDatePicker.Value;
                 var phone = phoneTxt.Text;
-                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person == _userRole.Person);
+                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person.IdPerson == _userRole.Person.IdPerson);
                 if (birthday > DateTime.Now || birthday < DateTime.Parse("01.01.1900"))
                 {
-                    throw new Exception();
+                    throw new Exception("Перевірте правильність введеного дня народження!");
                 }
                 if (!Utilities.IsValidPhone(phone))
                 {
-                    throw new Exception();
+                    throw new Exception("Перевірте правильність введеного телефона!");
                 }
                 var contractor = new Contractor
                 {
                     Phone = phone,
                     Address = addressTxt.Text,
-                    ContrName = nameTxt.Text,
+                    ContrName = nameTxt.Text
                 };
                 if (entityRadio.Checked)
                 {
@@ -78,7 +78,7 @@ namespace DBCourseWork.AdminForms
                         Contractor = entityContractor.Contractor
                     });
                     _context.SaveChanges();
-                    MessageBox.Show(@"Changes saved succesfully!");
+                    MessageBox.Show(@"Дані були успішно збережені!");
                     Utilities.ClearSpace(this);
                 }
                 else if (individRadio.Checked)
@@ -93,20 +93,21 @@ namespace DBCourseWork.AdminForms
                         Stuff = stuff,
                         DocDate = DateTime.Now,
                         DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterContractor"),
-                        Contractor = individContr.Contractor
+                        Contractor = contractor
                     });
                     _context.SaveChanges();
-                    MessageBox.Show(@"Changes saved succesfully!");
+                    MessageBox.Show(@"Дані були успішно збережені!");
                     Utilities.ClearSpace(this);
                 }
                 else
                 {
-                    MessageBox.Show(@"Choose the type of contractor!");
+                    throw new Exception("Оберіть тип контрагента!");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show(@"Check the entered information!");
+                Utilities.ClearSpace(this);
+                MessageBox.Show(ex.Message);
             }
 
         }

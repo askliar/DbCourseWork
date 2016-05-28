@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBCourseWork.Entities;
 using Action = DBCourseWork.Entities.Action;
@@ -48,31 +42,31 @@ namespace DBCourseWork.OperatorForms
         {
             try
             {
-                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person == _userRole.Person);
+                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person.IdPerson == _userRole.Person.IdPerson);
                 double percent;
                 if (!double.TryParse(discountTxt.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out percent))
                 {
-                    throw new Exception("The entered discount value is wrong!");
+                    throw new Exception("Перевірте введену знижку!");
                 }
                 var startDate = startDatePicker.Value;
                 var endDate = endDatePicker.Value;
                 if (startDate > DateTime.Now || startDate < DateTime.Parse("01.01.1900") || endDate <= DateTime.Now ||
                     endDate >= DateTime.Now.AddYears(5) || percent > 100)
                 {
-                    throw new Exception("The entered dates are wrong!");
+                    throw new Exception("Перевірте правильність введеної дати!");
                 }
                 var card = new Card();
                 var action = new Action
                 {
                     DayStart = startDate,
                     DayStop = endDate,
-                    Percents = percent,
+                    Percents = percent
                 };
                 action.Cards.Add(card);
                 var contractorData = contrCombobox.SelectedItem as String;
                 if (contractorData == null)
                 {
-                    throw new Exception("Choose the contractor!");
+                    throw new Exception("Оберіть контрагента!");
                 }
                 var firstIndex = contractorData.IndexOf(" :-: ", StringComparison.Ordinal);
                 var lastIndex = contractorData.LastIndexOf(" :-: ", StringComparison.Ordinal);
@@ -98,15 +92,15 @@ namespace DBCourseWork.OperatorForms
                             Contractor = individContr.Contractor,
                             Stuff = stuff,
                             DocDate = DateTime.Now,
-                            DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterCard"),
+                            DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterCard")
                         });
                         _context.SaveChanges();
-                        MessageBox.Show(@"Changes saved succesfully!");
+                        MessageBox.Show(@"Дані були успішно збережені!");
                         Utilities.ClearSpace(this);
                     }
                     else
                     {
-                        throw new Exception("There is no such contractor!");
+                        throw new Exception("Такого контрагента не існує!");
                     }
                 }
                 else
@@ -129,21 +123,22 @@ namespace DBCourseWork.OperatorForms
                             Contractor = entityContr.Contractor,
                             Stuff = stuff,
                             DocDate = DateTime.Now,
-                            DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterCard"),
+                            DocType = _context.DocTypes.First(type => type.Doctype1 == "RegisterCard")
                         });
                         _context.SaveChanges();
-                        MessageBox.Show(@"Changes saved succesfully!");
+                        MessageBox.Show(@"Дані були успішно збережені!");
                         Utilities.ClearSpace(this);
                     }
                     else
                     {
-                        throw new Exception("There is no such contractor!");
+                        throw new Exception("Такого не контрагента не існує!");
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show(@"Check the entered information!");
+                Utilities.ClearSpace(this);
+                MessageBox.Show(ex.Message);
             }
         }
     }

@@ -15,8 +15,7 @@ namespace DBCourseWork.Entities
             GoodsMoves = new HashSet<GoodsMove>();
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdDoc { get; set; }
 
         [Column(TypeName = "date")]

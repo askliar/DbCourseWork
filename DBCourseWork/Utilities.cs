@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -39,12 +38,12 @@ namespace DBCourseWork
             }
         }
 
-        public static bool IsValidPhone(string Phone)
+        public static bool IsValidPhone(string phone)
         {
-            if (string.IsNullOrEmpty(Phone))
+            if (string.IsNullOrEmpty(phone))
                 return false;
             var r = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
-            return r.IsMatch(Phone);
+            return r.IsMatch(phone);
         }
     }
 }

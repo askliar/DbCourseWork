@@ -1,11 +1,14 @@
-﻿namespace DBCourseWork.AdminForms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace DBCourseWork.AdminForms
 {
     partial class DebitItemForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -137,13 +140,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox quantityTxt;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button exitBtn;
-        private System.Windows.Forms.Button sellBtn;
-        private System.Windows.Forms.ComboBox itemsCombobox;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox contrCombobox;
+        private Label label2;
+        private TextBox quantityTxt;
+        private Label label1;
+        private Button exitBtn;
+        private Button sellBtn;
+        private ComboBox itemsCombobox;
+        private Label label3;
+        private ComboBox contrCombobox;
     }
 }

@@ -1,11 +1,14 @@
-﻿namespace DBCourseWork.AdminForms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace DBCourseWork.AdminForms
 {
     partial class BuyItemForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -138,13 +141,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button exitBtn;
-        private System.Windows.Forms.Button buyBtn;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox qunatityTxt;
-        private System.Windows.Forms.ComboBox itemsCombobox;
-        private System.Windows.Forms.ComboBox contrCombobox;
+        private Button exitBtn;
+        private Button buyBtn;
+        private Label label2;
+        private Label label1;
+        private Label label3;
+        private TextBox qunatityTxt;
+        private ComboBox itemsCombobox;
+        private ComboBox contrCombobox;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using DBCourseWork.Entities;
 
 namespace DBCourseWork.OperatorForms
@@ -20,12 +21,21 @@ namespace DBCourseWork.OperatorForms
             var form = new AddActionForm(_context, _userRole);
             Hide();
             form.ShowDialog();
-            this.Show();
+            Show();
         }
 
-        private void exitBtn_Click(object sender, System.EventArgs e)
+        private void exitBtn_Click(object sender, EventArgs e)
         {
+            _context.Dispose();
             Close();
+        }
+
+        private void sellLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var form = new SellingPageForm(_context, _userRole);
+            Hide();
+            form.ShowDialog();
+            Show();
         }
     }
 }

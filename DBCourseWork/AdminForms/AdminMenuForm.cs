@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using DBCourseWork.Entities;
 
 namespace DBCourseWork.AdminForms
@@ -20,7 +21,7 @@ namespace DBCourseWork.AdminForms
             var form = new AddContractorForm(_context, _userRole);
             Hide();
             form.ShowDialog();
-            this.Show();
+            Show();
         }
 
         private void itemLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -28,7 +29,7 @@ namespace DBCourseWork.AdminForms
             var form = new AddItemForm(_context, _userRole);
             Hide();
             form.ShowDialog();
-            this.Show();
+            Show();
         }
 
         private void deleteLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -36,7 +37,7 @@ namespace DBCourseWork.AdminForms
             var form = new DebitItemForm(_context, _userRole);
             Hide();
             form.ShowDialog();
-            this.Show();
+            Show();
         }
 
         private void goodsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -44,10 +45,10 @@ namespace DBCourseWork.AdminForms
             var form = new BuyItemForm(_context, _userRole);
             Hide();
             form.ShowDialog();
-            this.Show();
+            Show();
         }
 
-        private void exitBtn_Click(object sender, System.EventArgs e)
+        private void exitBtn_Click(object sender, EventArgs e)
         {
             _context.Dispose();
             Close();

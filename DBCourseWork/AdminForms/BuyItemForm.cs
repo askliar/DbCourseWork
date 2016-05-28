@@ -46,31 +46,31 @@ namespace DBCourseWork.AdminForms
             itemsCombobox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private void exitBtn_Click(object sender, System.EventArgs e)
+        private void exitBtn_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void buyBtn_Click(object sender, System.EventArgs e)
+        private void buyBtn_Click(object sender, EventArgs e)
         {
             try
             {
                 GoodsMove goodsMove;
-                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person == _userRole.Person);
+                var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person.IdPerson == _userRole.Person.IdPerson);
                 var quantity = int.Parse(qunatityTxt.Text);
                 if (quantity <= 0)
                 {
-                    throw new Exception("The entered quantity is wrong!");
+                    throw new Exception("Перевірте правильність введеної кількості!");
                 }
                 var contractorData = contrCombobox.SelectedItem as string;
                 if (contractorData == null)
                 {
-                    throw new Exception("Choose the contractor!");
+                    throw new Exception("Оберіть контрагента!");
                 }
                 var itemName = itemsCombobox.SelectedItem as string;
                 if (itemName == null)
                 {
-                    throw new Exception("Choose the item!");
+                    throw new Exception("Оберіть товар!");
                 }
                 var firstItemIndex = itemName.IndexOf(" :-: ", StringComparison.Ordinal);
                 if (firstItemIndex == -1)
@@ -87,7 +87,7 @@ namespace DBCourseWork.AdminForms
                     }
                     else
                     {
-                        throw new Exception("There is no such item!");
+                        throw new Exception("Такого товару не існує! Спочатку додайте його в систему!");
                     }
                 }
                 else
@@ -109,7 +109,7 @@ namespace DBCourseWork.AdminForms
                     }
                     else
                     {
-                        throw new Exception("There is no such book!");
+                        throw new Exception("Такої книги не існує!");
                     }
                 }
                 var firstIndex = contractorData.IndexOf(" :-: ", StringComparison.Ordinal);
@@ -133,17 +133,17 @@ namespace DBCourseWork.AdminForms
                             Stuff = stuff,
                             GoodsMoves = new List<GoodsMove> { goodsMove },
                             DocDate = DateTime.Now,
-                            DocType = _context.DocTypes.First(type => type.Doctype1 == "Buy"),
+                            DocType = _context.DocTypes.First(type => type.Doctype1 == "Buy")
                         };
                         _context.Documentations.Add(documentation);
                         goodsMove.Documentation = documentation;
                         _context.GoodsMoves.Add(goodsMove);
-                        MessageBox.Show(@"Changes saved succesfully!");
+                        MessageBox.Show(@"Дані були успішно збережені!");
                         Utilities.ClearSpace(this);
                     }
                     else
                     {
-                        throw new Exception("There is no such contractor!");
+                        throw new Exception("Такого контрагента не існує!");
                     }
                 }
                 else
@@ -163,24 +163,25 @@ namespace DBCourseWork.AdminForms
                             Stuff = stuff,
                             GoodsMoves = new List<GoodsMove> { goodsMove },
                             DocDate = DateTime.Now,
-                            DocType = _context.DocTypes.First(type => type.Doctype1 == "Buy"),
+                            DocType = _context.DocTypes.First(type => type.Doctype1 == "Buy")
                         };
                         _context.Documentations.Add(documentation);
                         goodsMove.Documentation = documentation;
                         _context.GoodsMoves.Add(goodsMove);
                         _context.SaveChanges();
-                        MessageBox.Show(@"Changes saved succesfully!");
+                        MessageBox.Show(@"Дані були успішно збережені!");
                         Utilities.ClearSpace(this);
                     }
                     else
                     {
-                        throw new Exception("There is no such contractor!");
+                        throw new Exception("Такого контрагента не існує!");
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show(@"Check the entered information!");
+                Utilities.ClearSpace(this);
+                MessageBox.Show(ex.Message);
             }
         }
     }

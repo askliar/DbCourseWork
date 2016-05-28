@@ -1,11 +1,14 @@
-﻿namespace DBCourseWork.OperatorForms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace DBCourseWork.OperatorForms
 {
     partial class SellerMenuForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -43,6 +46,7 @@
             this.sellLink.TabIndex = 0;
             this.sellLink.TabStop = true;
             this.sellLink.Text = "1. Продати Товар";
+            this.sellLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.sellLink_LinkClicked);
             // 
             // cardLink
             // 
@@ -89,8 +93,8 @@
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel sellLink;
-        private System.Windows.Forms.LinkLabel cardLink;
-        private System.Windows.Forms.Button exitBtn;
+        private LinkLabel sellLink;
+        private LinkLabel cardLink;
+        private Button exitBtn;
     }
 }
