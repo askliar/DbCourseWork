@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DBCourseWork.Entities;
 
-namespace DBCourseWork.AdminForms
+namespace DBCourseWork.ReDesign
 {
     public partial class AddItemForm : Form
     {

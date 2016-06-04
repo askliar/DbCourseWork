@@ -41,12 +41,16 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FastReport, Version=2016.3.0.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c" />
+    <Reference Include="FastReport.Bars, Version=2016.3.0.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c" />
+    <Reference Include="FastReport.Editor, Version=2016.3.0.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +62,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReDesign\MainOperatorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReDesign\MainOperatorForm.Designer.cs">
+      <DependentUpon>MainOperatorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReDesign\BuyItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReDesign\BuyItemForm.Designer.cs">
+      <DependentUpon>BuyItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReDesign\AddActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReDesign\AddActionForm.Designer.cs">
+      <DependentUpon>AddActionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForms\AddContractorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +91,24 @@
     </Compile>
     <Compile Include="AdminForms\AddItemForm.Designer.cs">
       <DependentUpon>AddItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReDesign\AddItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReDesign\AddItemForm.Designer.cs">
+      <DependentUpon>AddItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReDesign\MainAdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReDesign\MainAdminForm.Designer.cs">
+      <DependentUpon>MainAdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReDesign\DebitItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReDesign\DebitItemForm.Designer.cs">
+      <DependentUpon>DebitItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Absence.cs" />
     <Compile Include="Entities\AbsenceType.cs" />
@@ -138,6 +178,15 @@
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\Vacancy.cs" />
     <Compile Include="Utilities.cs" />
+    <EmbeddedResource Include="ReDesign\MainOperatorForm.resx">
+      <DependentUpon>MainOperatorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReDesign\BuyItemForm.resx">
+      <DependentUpon>BuyItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReDesign\AddActionForm.resx">
+      <DependentUpon>AddActionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\AddContractorForm.resx">
       <DependentUpon>AddContractorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,6 +200,15 @@
       <DependentUpon>BuyItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\DebitItemForm.resx">
+      <DependentUpon>DebitItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReDesign\AddItemForm.resx">
+      <DependentUpon>AddItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReDesign\MainAdminForm.resx">
+      <DependentUpon>MainAdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReDesign\DebitItemForm.resx">
       <DependentUpon>DebitItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">

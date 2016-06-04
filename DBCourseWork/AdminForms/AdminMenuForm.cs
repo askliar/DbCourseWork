@@ -26,7 +26,7 @@ namespace DBCourseWork.AdminForms
 
         private void itemLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var form = new AddItemForm(_context, _userRole);
+            var form = new ReDesign.AddItemForm(_context, _userRole);
             Hide();
             form.ShowDialog();
             Show();

@@ -16,7 +16,7 @@ namespace DBCourseWork.AdminForms
             _context = context;
             _userRole = user;
             InitializeComponent();
-            var goods = _context.Goods.ToList();
+            var goods = _context.Goods.Where(good => good.GoodName != "Book").ToList();
             var books = _context.Books.ToList();
             foreach (var good in goods)
             {
@@ -26,7 +26,7 @@ namespace DBCourseWork.AdminForms
             foreach (var book in books)
             {
                 itemsCombobox.Items.Add(
-                    $"{book.Name} :-: {book.Author} :-: {book.Year} :-: {book.ISBN}");
+                    $"{book.Name} :-: {book.Author} :-: {book.Year} :-: {book.Isbn}");
             }
             var entityContractors = _context.EntityContrs.ToList();
             var individContractors = _context.IndividContrs.ToList();
@@ -96,7 +96,7 @@ namespace DBCourseWork.AdminForms
                     var lastBookIndex = itemName.LastIndexOf(" :-: ", StringComparison.Ordinal);
                     var bookName = itemName.Substring(0, firstBookIndex);
                     var bookIsbn = itemName.Substring(lastBookIndex + 5);
-                    var book = _context.Books.FirstOrDefault(book1 => book1.ISBN == bookIsbn && book1.Name == bookName);
+                    var book = _context.Books.FirstOrDefault(book1 => book1.Isbn == bookIsbn && book1.Name == bookName);
                     var good = _context.Goods.FirstOrDefault(good1 => good1.Books.Contains(book));
                     if (book != null)
                     {
@@ -154,7 +154,7 @@ namespace DBCourseWork.AdminForms
                                 contr.ContrName == contractorName && contr.Address == contractorAddress);
                     var entityContr =
                         _context.EntityContrs.FirstOrDefault(
-                            contr => contr.Contractor == contractor && contr.StateNumber == contractorDetails);
+                            contr => contr.Contractor.IdContr == contractor.IdContr && contr.StateNumber == contractorDetails);
                     if (entityContr != null)
                     {
                         var documentation = new Documentation

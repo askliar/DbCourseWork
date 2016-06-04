@@ -9,6 +9,8 @@ namespace DBCourseWork.AdminForms
     {
         private readonly ApplicationDbContext _context;
         private readonly UserRole _userRole;
+        private dynamic _individContrs;
+        private dynamic _entityContrs;
 
         public AddContractorForm(ApplicationDbContext context, UserRole user)
         {
@@ -17,6 +19,10 @@ namespace DBCourseWork.AdminForms
             InitializeComponent();
             entityRadio.Checked = true;
             birthDatePicker.Enabled = false;
+            _individContrs = _context.IndividContrs.Select(contr => new {contr.Contractor.ContrName, contr.Contractor.Address, contr.Contractor.Phone, contr.Birthday}).ToList();
+            _entityContrs = _context.EntityContrs.Select(contr => new { contr.Contractor.ContrName, contr.Contractor.Address, contr.Contractor.Phone, contr.StateNumber}).ToList();
+            dataGridView1.DataSource = _entityContrs;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
@@ -29,6 +35,10 @@ namespace DBCourseWork.AdminForms
             entityRadio.Checked = !individRadio.Checked;
             birthDatePicker.Enabled = individRadio.Checked;
             registrationNumTxt.Enabled = entityRadio.Checked;
+            if (entityRadio.Checked)
+            {
+                dataGridView1.DataSource = _entityContrs;
+            }
         }
 
         private void entityRadio_CheckedChanged(object sender, EventArgs e)
@@ -36,6 +46,10 @@ namespace DBCourseWork.AdminForms
             individRadio.Checked = !entityRadio.Checked;
             birthDatePicker.Enabled = individRadio.Checked;
             registrationNumTxt.Enabled = entityRadio.Checked;
+            if (individRadio.Checked)
+            {
+                dataGridView1.DataSource = _individContrs;
+            }
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -98,6 +112,9 @@ namespace DBCourseWork.AdminForms
                     _context.SaveChanges();
                     MessageBox.Show(@"Дані були успішно збережені!");
                     Utilities.ClearSpace(this);
+                    _individContrs = _context.IndividContrs.Select(contr => new { contr.Contractor.ContrName, contr.Contractor.Address, contr.Contractor.Phone, contr.Birthday }).ToList();
+                    _entityContrs = _context.EntityContrs.Select(contr => new { contr.Contractor.ContrName, contr.Contractor.Address, contr.Contractor.Phone, contr.StateNumber }).ToList();
+                    entityRadio_CheckedChanged(this, e);
                 }
                 else
                 {

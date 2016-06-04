@@ -21,7 +21,7 @@ namespace DBCourseWork.Entities
 
         [Required]
         [StringLength(12)]
-        public string ISBN { get; set; }
+        public string Isbn { get; set; }
 
         public int IdGoods { get; set; }
 

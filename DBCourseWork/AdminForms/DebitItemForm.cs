@@ -16,12 +16,14 @@ namespace DBCourseWork.AdminForms
             _context = context;
             _userRole = user;
             InitializeComponent();
-            var availableGoods = context.GoodInfoes.Where(x => x.Quantity > 0).ToList();
+            var availableGoods = _context.GoodInfoes.Where(x => x.Quantity > 0).ToList();
+            dataGridView1.DataSource = availableGoods;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (var availableGood in availableGoods)
             {
                 itemsCombobox.Items.Add(
-                    availableGood.ISBN != null
-                        ? $"{availableGood.Name} :-: {availableGood.Author} :-: {availableGood.Year} :-: {availableGood.ISBN}"
+                    availableGood.Isbn != null
+                        ? $"{availableGood.Name} :-: {availableGood.Author} :-: {availableGood.Year} :-: {availableGood.Isbn}"
                         : $"{availableGood.GoodName}");
             }
 
@@ -83,7 +85,7 @@ namespace DBCourseWork.AdminForms
                     var lastBookIndex = itemName.LastIndexOf(" :-: ", StringComparison.Ordinal);
                     var bookName = itemName.Substring(0, firstBookIndex);
                     var bookIsbn = itemName.Substring(lastBookIndex + 5);
-                    var book = _context.Books.FirstOrDefault(book1 => book1.ISBN == bookIsbn && book1.Name == bookName);
+                    var book = _context.Books.FirstOrDefault(book1 => book1.Isbn == bookIsbn && book1.Name == bookName);
                     var good = _context.Goods.FirstOrDefault(good1 => good1.Books.Contains(book));
                     if (book != null)
                     {
@@ -165,117 +167,124 @@ namespace DBCourseWork.AdminForms
                         throw new Exception("Такого контрагента не існує!");
                     }
                 }
+                var availableGoods = _context.GoodInfoes.Where(x => x.Quantity > 0).ToList();
+                dataGridView1.DataSource = availableGoods;
+                contrCombobox.Enabled = false;
+                dataGridView1.Update();
             }
             catch (Exception ex)
             {
                 Utilities.ClearSpace(this);
+                contrCombobox.Enabled = false;
                 MessageBox.Show(ex.Message);
             }
         }
 
         private void itemsCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            if (itemsCombobox.Text != String.Empty)
             {
-                var itemName = itemsCombobox.SelectedItem as string;
-                if (itemName == null)
+                try
                 {
-                    throw new Exception("Оберіть товар!");
-                }
-                var firstItemIndex = itemName.IndexOf(" :-: ", StringComparison.Ordinal);
-                if (firstItemIndex == -1)
-                {
-                    var item = _context.Goods.FirstOrDefault(good => good.GoodName == itemName);
-                    if (item != null)
+                    var itemName = itemsCombobox.SelectedItem as string;
+                    if (itemName == null)
                     {
-                        contrCombobox.Enabled = true;
-                        var correctRows =
-                            _context.GoodInfoes.Where(info => info.GoodName == item.GoodName && info.Quantity > 0)
-                                .ToList();
-                        foreach (var correctRow in correctRows)
+                        throw new Exception("Оберіть товар!");
+                    }
+                    var firstItemIndex = itemName.IndexOf(" :-: ", StringComparison.Ordinal);
+                    if (firstItemIndex == -1)
+                    {
+                        var item = _context.Goods.FirstOrDefault(good => good.GoodName == itemName);
+                        if (item != null)
                         {
-                            var entityContractors =
-                                _context.EntityContrs.Where(
-                                    ent =>
-                                        ent.Contractor.ContrName == correctRow.ContrName &&
-                                        ent.Contractor.Address == correctRow.Address &&
-                                        ent.Contractor.Phone == correctRow.Phone).ToList();
-                            var individContractors =
-                                _context.IndividContrs.Where(
-                                    ent =>
-                                        ent.Contractor.ContrName == correctRow.ContrName &&
-                                        ent.Contractor.Address == correctRow.Address &&
-                                        ent.Contractor.Phone == correctRow.Phone).ToList();
-                            foreach (var individContractor in individContractors)
+                            contrCombobox.Enabled = true;
+                            var correctRows =
+                                _context.GoodInfoes.Where(info => info.GoodName == item.GoodName && info.Quantity > 0)
+                                    .ToList();
+                            foreach (var correctRow in correctRows)
                             {
-                                contrCombobox.Items.Add(
-                                    $"{individContractor.Contractor.ContrName} :-: {individContractor.Contractor.Address} :-: {individContractor.Birthday.ToString("dd/MM/yyyy")}");
+                                var entityContractors =
+                                    _context.EntityContrs.Where(
+                                        ent =>
+                                            ent.Contractor.ContrName == correctRow.ContrName &&
+                                            ent.Contractor.Address == correctRow.Address &&
+                                            ent.Contractor.Phone == correctRow.Phone).ToList();
+                                var individContractors =
+                                    _context.IndividContrs.Where(
+                                        ent =>
+                                            ent.Contractor.ContrName == correctRow.ContrName &&
+                                            ent.Contractor.Address == correctRow.Address &&
+                                            ent.Contractor.Phone == correctRow.Phone).ToList();
+                                foreach (var individContractor in individContractors)
+                                {
+                                    contrCombobox.Items.Add(
+                                        $"{individContractor.Contractor.ContrName} :-: {individContractor.Contractor.Address} :-: {individContractor.Birthday.ToString("dd/MM/yyyy")}");
+                                }
+                                foreach (var entityContractor in entityContractors)
+                                {
+                                    contrCombobox.Items.Add(
+                                        $"{entityContractor.Contractor.ContrName} :-: {entityContractor.Contractor.Address} :-: {entityContractor.StateNumber}");
+                                }
                             }
-                            foreach (var entityContractor in entityContractors)
-                            {
-                                contrCombobox.Items.Add(
-                                    $"{entityContractor.Contractor.ContrName} :-: {entityContractor.Contractor.Address} :-: {entityContractor.StateNumber}");
-                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Такого товару не існує!");
                         }
                     }
                     else
                     {
-                        throw new Exception("Такого товару не існує!");
-                    }
-                }
-                else
-                {
-                    var firstBookIndex = itemName.IndexOf(" :-: ", StringComparison.Ordinal);
-                    var lastBookIndex = itemName.LastIndexOf(" :-: ", StringComparison.Ordinal);
-                    var bookName = itemName.Substring(0, firstBookIndex);
-                    var bookIsbn = itemName.Substring(lastBookIndex + 5);
-                    var book = _context.Books.FirstOrDefault(book1 => book1.ISBN == bookIsbn && book1.Name == bookName);
-                    var good = _context.Goods.FirstOrDefault(good1 => good1.Books.Contains(book));
-                    if (book != null)
-                    {
-                        contrCombobox.Enabled = true;
-                        var correctRows =
-                            _context.GoodInfoes.Where(
-                                item =>
-                                    item.Name == book.Name && item.Author == book.Author && item.ISBN == book.ISBN &&
-                                    item.Year == book.Year).ToList();
-                        foreach (var correctRow in correctRows)
+                        var firstBookIndex = itemName.IndexOf(" :-: ", StringComparison.Ordinal);
+                        var lastBookIndex = itemName.LastIndexOf(" :-: ", StringComparison.Ordinal);
+                        var bookName = itemName.Substring(0, firstBookIndex);
+                        var bookIsbn = itemName.Substring(lastBookIndex + 5);
+                        var book =
+                            _context.Books.FirstOrDefault(book1 => book1.Isbn == bookIsbn && book1.Name == bookName);
+                        if (book != null)
                         {
-                            var entityContractors =
-                                _context.EntityContrs.Where(
-                                    ent =>
-                                        ent.Contractor.ContrName == correctRow.ContrName &&
-                                        ent.Contractor.Address == correctRow.Address &&
-                                        ent.Contractor.Phone == correctRow.Phone).ToList();
-                            var individContractors =
-                                _context.IndividContrs.Where(
-                                    ent =>
-                                        ent.Contractor.ContrName == correctRow.ContrName &&
-                                        ent.Contractor.Address == correctRow.Address &&
-                                        ent.Contractor.Phone == correctRow.Phone).ToList();
-                            foreach (var individContractor in individContractors)
+                            contrCombobox.Enabled = true;
+                            var correctRows =
+                                _context.GoodInfoes.Where(
+                                    item =>
+                                        item.Name == book.Name && item.Author == book.Author && item.Isbn == book.Isbn &&
+                                        item.Year == book.Year).ToList();
+                            foreach (var correctRow in correctRows)
                             {
-                                contrCombobox.Items.Add(
-                                    $"{individContractor.Contractor.ContrName} :-: {individContractor.Contractor.Address} :-: {individContractor.Birthday.ToString("dd/MM/yyyy")}");
-                            }
-                            foreach (var entityContractor in entityContractors)
-                            {
-                                contrCombobox.Items.Add(
-                                    $"{entityContractor.Contractor.ContrName} :-: {entityContractor.Contractor.Address} :-: {entityContractor.StateNumber}");
+                                var entityContractors =
+                                    _context.EntityContrs.Where(
+                                        ent =>
+                                            ent.Contractor.ContrName == correctRow.ContrName &&
+                                            ent.Contractor.Address == correctRow.Address &&
+                                            ent.Contractor.Phone == correctRow.Phone).ToList();
+                                var individContractors =
+                                    _context.IndividContrs.Where(
+                                        ent =>
+                                            ent.Contractor.ContrName == correctRow.ContrName &&
+                                            ent.Contractor.Address == correctRow.Address &&
+                                            ent.Contractor.Phone == correctRow.Phone).ToList();
+                                foreach (var individContractor in individContractors)
+                                {
+                                    contrCombobox.Items.Add(
+                                        $"{individContractor.Contractor.ContrName} :-: {individContractor.Contractor.Address} :-: {individContractor.Birthday.ToString("dd/MM/yyyy")}");
+                                }
+                                foreach (var entityContractor in entityContractors)
+                                {
+                                    contrCombobox.Items.Add(
+                                        $"{entityContractor.Contractor.ContrName} :-: {entityContractor.Contractor.Address} :-: {entityContractor.StateNumber}");
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        throw new Exception("Такої книги не існує!");
+                        else
+                        {
+                            throw new Exception("Такої книги не існує!");
+                        }
                     }
                 }
-
-            }
-            catch (Exception ex)
-            {
-                Utilities.ClearSpace(this);
-                MessageBox.Show(ex.Message);
+                catch (Exception ex)
+                {
+                    Utilities.ClearSpace(this);
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

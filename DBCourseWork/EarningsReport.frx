@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/04/2016 05:49:51" ReportInfo.Modified="06/04/2016 06:35:47" ReportInfo.CreatorVersion="2016.3.0.0">
+  <Styles Name="Песочный">
+    <Style Name="Залоговок отчета" Font="Arial, 12pt, style=Bold"/>
+    <Style Name="Заголовок данных" Fill.Color="Moccasin" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Группа" Font="Arial, 10pt, style=Bold"/>
+    <Style Name="Данные"/>
+    <Style Name="Подвал" Fill.Color="Moccasin"/>
+    <Style Name="Четные строки" Fill.Color="FloralWhite"/>
+  </Styles>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqrcx472cknBfktP1ucbq4+ov4KV35utX7Wz4WJxczy46+QtrIj4nVnbqVq3YCTfEfB99d90PXSQBYZSDzcHv6WCNziWpda2e2Ge5sPNmrSfiBat7ZAarypmqGndgniFi/mwHyUHRE9IZMSYaADftfyBVfxst48b9dpACILmGB6I33Tov/chERlnAoNySBhrlRLmW/UZhYonKqN5ETC9lwEQ==">
+      <TableDataSource Name="TotalEarningsView" DataType="System.Int32" Enabled="true" TableName="TotalEarningsView">
+        <Column Name="Назва товару" DataType="System.String"/>
+        <Column Name="Загальні покупки" DataType="System.Int32"/>
+        <Column Name="Назва книги" DataType="System.String"/>
+        <Column Name="Автор" DataType="System.String"/>
+        <Column Name="ISBN" DataType="System.String"/>
+        <Column Name="Рік видання" DataType="System.Int32"/>
+        <Column Name="Ім`я контрагента" DataType="System.String"/>
+        <Column Name="Телефон контрагента" DataType="System.String"/>
+        <Column Name="Адреса контрагента" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="37.8">
+      <TextObject Name="Text1" Width="1047.06" Height="37.8" Dock="Fill" Text="Загальний прибуток з одиниці товару" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold" Style="Залоговок отчета"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="1047.06" Height="28.35">
+      <TextObject Name="Text3" Width="122.85" Height="18.9" Fill.Color="Moccasin" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="Назва товару" AutoWidth="true" Font="Arial, 10pt, style=Bold" Style="Заголовок данных"/>
+      <TextObject Name="Text5" Left="122.85" Width="122.85" Height="18.9" Fill.Color="Moccasin" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="Загальні покупки" AutoWidth="true" Font="Arial, 10pt, style=Bold" Style="Заголовок данных"/>
+      <TextObject Name="Text7" Left="245.7" Width="113.4" Height="18.9" Fill.Color="Moccasin" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="Назва книги" AutoWidth="true" Font="Arial, 10pt, style=Bold" Style="Заголовок данных"/>
+      <TextObject Name="Text9" Left="359.1" Width="113.4" Height="18.9" Fill.Color="Moccasin" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="Автор" AutoWidth="true" Font="Arial, 10pt, style=Bold" Style="Заголовок данных"/>
+      <TextObject Name="Text11" Left="472.5" Width="113.4" Height="18.9" Fill.Color="Moccasin" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="ISBN" AutoWidth="true" Font="Arial, 10pt, style=Bold" Style="Заголовок данных"/>
+      <TextObject Name="Text13" Left="585.9" Width="113.4" Height="18.9" Fill.Color="Moccasin" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="Рік видання" AutoWidth="true" Font="Arial, 10pt, style=Bold" Style="Заголовок данных"/>
+      <TextObject Name="Text15" Left="699.3" Width="113.4" Height="18.9" Fill.Color="Moccasin" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="Ім`я контрагента" AutoWidth="true" Font="Arial, 10pt, style=Bold" Style="Заголовок данных"/>
+      <TextObject Name="Text17" Left="812.7" Width="113.4" Height="18.9" Fill.Color="Moccasin" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="Телефон контрагента" AutoWidth="true" Font="Arial, 10pt, style=Bold" Style="Заголовок данных"/>
+      <TextObject Name="Text19" Left="926.1" Width="113.4" Height="18.9" Fill.Color="Moccasin" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="Адреса контрагента" AutoWidth="true" Font="Arial, 10pt, style=Bold" Style="Заголовок данных"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="74.15" Width="1047.06" Height="18.9" EvenStyle="Четные строки" DataSource="TotalEarningsView">
+      <TextObject Name="Text2" Width="122.85" Height="18.9" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[TotalEarningsView.Назва товару]" AutoWidth="true" Style="Данные"/>
+      <TextObject Name="Text4" Left="122.85" Width="122.85" Height="18.9" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[TotalEarningsView.Загальні покупки]" AutoWidth="true" Style="Данные"/>
+      <TextObject Name="Text6" Left="245.7" Width="113.4" Height="18.9" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[TotalEarningsView.Назва книги]" AutoWidth="true" Style="Данные"/>
+      <TextObject Name="Text8" Left="359.1" Width="113.4" Height="18.9" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[TotalEarningsView.Автор]" AutoWidth="true" Style="Данные"/>
+      <TextObject Name="Text10" Left="472.5" Width="113.4" Height="18.9" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[TotalEarningsView.ISBN]" AutoWidth="true" Style="Данные"/>
+      <TextObject Name="Text12" Left="585.9" Width="113.4" Height="18.9" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[TotalEarningsView.Рік видання]" AutoWidth="true" Style="Данные"/>
+      <TextObject Name="Text14" Left="699.3" Width="113.4" Height="18.9" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[TotalEarningsView.Ім`я контрагента]" AutoWidth="true" Style="Данные"/>
+      <TextObject Name="Text16" Left="812.7" Width="113.4" Height="18.9" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[TotalEarningsView.Телефон контрагента]" AutoWidth="true" Style="Данные"/>
+      <TextObject Name="Text18" Left="926.1" Width="113.4" Height="18.9" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[TotalEarningsView.Адреса контрагента]" AutoWidth="true" Style="Данные"/>
+    </DataBand>
+  </ReportPage>
+</Report>

@@ -140,7 +140,7 @@ namespace DBCourseWork
                 .IsUnicode(false);
 
             modelBuilder.Entity<Book>()
-                .Property(e => e.ISBN)
+                .Property(e => e.Isbn)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Contractor>()
@@ -222,7 +222,7 @@ namespace DBCourseWork
                 .IsUnicode(false);
 
             modelBuilder.Entity<GoodInfo>()
-                .Property(e => e.ISBN)
+                .Property(e => e.Isbn)
                 .IsUnicode(false);
 
             modelBuilder.Entity<GoodInfo>()

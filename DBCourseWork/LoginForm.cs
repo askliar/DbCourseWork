@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using DBCourseWork.AdminForms;
-using DBCourseWork.OperatorForms;
+using DBCourseWork.ReDesign;
 
 namespace DBCourseWork
 {
@@ -28,7 +27,7 @@ namespace DBCourseWork
                     if (user.Role == "admin")
                     {
                         var form =
-                            new AdminMenuForm(
+                            new MainAdminForm(
                                 new ApplicationDbContext(Utilities.ConnectionStringBuilder("admin", "admin")), user);
                         Hide();
                         form.Closed += (s, args) => Close();
@@ -37,7 +36,7 @@ namespace DBCourseWork
                     if (user.Role == "operator")
                     {
                         var form =
-                            new SellerMenuForm(
+                            new MainOperatorForm(
                                 new ApplicationDbContext(Utilities.ConnectionStringBuilder("operator", "operator")), user);
                         Hide();
                         form.Closed += (s, args) => Close();

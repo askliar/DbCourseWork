@@ -42,20 +42,16 @@ namespace DBCourseWork.OperatorForms
                     throw new Exception(
                         "Перевірте введений код товару! Такого товару або не існує в системі, або ж немає такої кількості товару.");
                 }
-                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                row.Cells[0].Value = itemId;
-                row.Cells[1].Value = availableItem.Price;
-                row.Cells[2].Value = availableItem.ISBN != null
-                    ? $"{availableItem.Name} :-: {availableItem.Author} :-: {availableItem.Year} :-: {availableItem.ISBN}"
-                    : $"{availableItem.GoodName}";
-                row.Cells[3].Value = quant;
-                dataGridView1.Rows.Add(row);
+                dataGridView1.Rows.Add(itemId, availableItem.Price, availableItem.Isbn != null
+                    ? $"{availableItem.Name} :-: {availableItem.Author} :-: {availableItem.Year} :-: {availableItem.Isbn}"
+                    : $"{availableItem.GoodName}", quant);
                 Utilities.ClearSpace(this);
                 quantityTxt.Text = 1.ToString();
             }
             catch (Exception ex)
             {
                 Utilities.ClearSpace(this);
+                quantityTxt.Text = 1.ToString();
                 MessageBox.Show(ex.Message);
             }
 
@@ -66,20 +62,30 @@ namespace DBCourseWork.OperatorForms
             try
             {
                 int cardId;
+                Card card = null;
                 var price = 0.0;
-                if (!int.TryParse(actiontxt.Text, out cardId))
+                Contractor contractor = null;
+                if (actiontxt.Text != String.Empty && !int.TryParse(actiontxt.Text, out cardId))
                 {
                     throw new Exception("Перевірте введений код картки!");
                 }
-                var card = _context.Cards.FirstOrDefault(x => x.IdCard == cardId);
-                if (card == null || card.Action.DayStop < DateTime.Now)
+                if (actiontxt.Text != string.Empty)
                 {
-                    throw new Exception(
-                        "Перевірте введений код картки! Такої картки або не існує, або строк її дії закінчився!");
+                    if (!int.TryParse(actiontxt.Text, out cardId))
+                    {
+                        throw new Exception("Перевірте введений код картки!");
+                    }
+                    card = _context.Cards.FirstOrDefault(x => x.IdCard == cardId);
+                    if (card == null || card.Action.DayStop < DateTime.Now)
+                    {
+                        throw new Exception(
+                            "Перевірте введений код картки! Такої картки або не існує, або строк її дії закінчився!");
+                    }
+                    contractor = _context.Contractors.First(contractor1 => contractor1.Card == card);
+
                 }
                 var listGoodsMoves = new List<GoodsMove>();
                 Documentation documentation = null;
-                var contractor = _context.Contractors.First(contractor1 => contractor1.Card == card);
                 var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person.IdPerson == _userRole.Person.IdPerson);
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
@@ -88,18 +94,18 @@ namespace DBCourseWork.OperatorForms
                         DocDate = DateTime.Now,
                         DocType = _context.DocTypes.First(x => x.Doctype1 == "Sell"),
                         Contractor = contractor,
-                        Stuff = stuff,
+                        Stuff = stuff
                     };
+                    var id = int.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString());
+                    var quant = int.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString());
                     listGoodsMoves.Add(new GoodsMove
                     {
-                        Quantity = -int.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString()),
+                        Quantity = -quant,
                         Documentation = documentation,
                         MoveType = "Sell",
-                        Good =
-                            _context.Goods.First(
-                                x => x.IdGoods == int.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString()))
+                        Good = _context.Goods.First(x => x.IdGoods == id)
                     });
-                    price += double.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString(), NumberStyles.Any,
+                    price += double.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString(), NumberStyles.Any,
                         CultureInfo.InvariantCulture) * int.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString());
                 }
                 if (documentation != null)
@@ -108,13 +114,16 @@ namespace DBCourseWork.OperatorForms
                 }
                 _context.GoodsMoves.AddRange(listGoodsMoves);
                 _context.SaveChanges();
-                if (card.Action.Percents != null) price = price * (double)card.Action.Percents;
+                if (card?.Action.Percents != null) price = price * (double)card.Action.Percents;
                 totalPrice_lbl.Text = $"Загальна Ціна: {price} грн.";
                 MessageBox.Show(@"Дані були успішно збережені!");
                 Utilities.ClearSpace(this);
+                quantityTxt.Text = 1.ToString();
             }
             catch (Exception ex)
             {
+                Utilities.ClearSpace(this);
+                quantityTxt.Text = 1.ToString();
                 MessageBox.Show(ex.Message);
             }
         }

@@ -111,7 +111,7 @@ namespace DBCourseWork.OperatorForms
                                 contr.ContrName == contractorName && contr.Address == contractorAddress);
                     var entityContr =
                         _context.EntityContrs.FirstOrDefault(
-                            contr => contr.Contractor == contractor && contr.StateNumber == contractorDetails);
+                            contr => contr.Contractor.IdContr == contractor.IdContr && contr.StateNumber == contractorDetails);
                     if (entityContr != null)
                     {
                         entityContr.Contractor.Card = card;

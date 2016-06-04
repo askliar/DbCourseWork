@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DBCourseWork
+namespace DBCourseWork.Entities
 {
     [Table("Sklyar_A.GoodInfo")]
     public class GoodInfo
@@ -29,7 +29,7 @@ namespace DBCourseWork
         public string Author { get; set; }
 
         [StringLength(12)]
-        public string ISBN { get; set; }
+        public string Isbn { get; set; }
 
         public int? Year { get; set; }
 
