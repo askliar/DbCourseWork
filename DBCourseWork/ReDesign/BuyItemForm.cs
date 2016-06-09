@@ -11,8 +11,8 @@ namespace DBCourseWork.ReDesign
     {
         private readonly ApplicationDbContext _context;
         private readonly UserRole _userRole;
-        private readonly dynamic _books;
-        private readonly dynamic _goods;
+        private dynamic _books;
+        private dynamic _goods;
         private readonly EntityContr _entityContr;
         private readonly IndividContr _individContr;
 
@@ -28,8 +28,15 @@ namespace DBCourseWork.ReDesign
             otherRadio.Checked = true;
             dataGridView1.DataSource = _goods;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                var dataGridViewColumn = dataGridView1.Columns[column.Name];
+                if (dataGridViewColumn != null)
+                    dataGridViewColumn.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+            dataGridView2.AutoGenerateColumns = true;
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            foreach (DataGridViewColumn column in dataGridView2.Columns)
             {
                 var dataGridViewColumn = dataGridView1.Columns[column.Name];
                 if (dataGridViewColumn != null)
@@ -41,69 +48,55 @@ namespace DBCourseWork.ReDesign
         {
             try
             {
-                GoodsMove goodsMove;
+                List<GoodsMove> goodsMoves = new List<GoodsMove>();
                 var stuff = _context.Stuffs.FirstOrDefault(stuff1 => stuff1.Person.IdPerson == _userRole.Person.IdPerson);
-                int quantity;
-                var result = int.TryParse(quantityTxt.Text, out quantity);
-                if (!result)
+                for (int i = 0; i < dataGridView2.Rows.Count; i++)
                 {
-                    throw new Exception("Перевірте правильність введеної кількості!");
-                }
-                if (quantity <= 0)
-                {
-                    throw new Exception("Перевірте правильність введеної кількості!");
-                }
-                var selectedRow = dataGridView1.SelectedRows[0];
-                if (selectedRow == null)
-                {
-                    throw new Exception("Оберіть товар!");
-                }
-                if (bookRadio.Checked)
-                {
-                    var bookName = selectedRow.Cells[0].Value.ToString();
-                    var author = selectedRow.Cells[1].Value.ToString();
-                    var year = int.Parse(selectedRow.Cells[2].Value.ToString());
-                    var isbn = selectedRow.Cells[3].Value.ToString();
-                    var book =
-                        _context.Books.FirstOrDefault(
-                            book1 =>
-                                book1.Name == bookName && book1.Author == author && book1.Isbn == isbn &&
-                                book1.Year == year);
-                    var good = _context.Goods.FirstOrDefault(good1 => good1.Books.Contains(book));
-                    if (book != null)
+                    var goodName = dataGridView2.Rows[i].Cells[0].Value?.ToString();
+                    var authorStr = dataGridView2.Rows[i].Cells[2].Value?.ToString();
+                    var bookStr = dataGridView2.Rows[i].Cells[3].Value?.ToString();
+                    var quant = int.Parse(dataGridView2.Rows[i].Cells[5].Value.ToString());
+                    if (authorStr != null)
                     {
-                        goodsMove = new GoodsMove
+                        var book =
+                       _context.Books.FirstOrDefault(
+                           book1 =>
+                               book1.Name == bookStr && book1.Author == authorStr);
+                        var good = _context.Goods.FirstOrDefault(good1 => good1.Books.Contains(book));
+                        if (book != null)
                         {
-                            Good = good,
-                            MoveType = "Buy",
-                            Quantity = quantity
-                        };
-                    }
-                    else
-                    {
-                        throw new Exception("Такого товару не існує! Спочатку додайте його в систему!");
-                    }
-                }
-                else
-                {
-                    var goodName = selectedRow.Cells[0].Value.ToString();
-                    var goodTerm = int.Parse(selectedRow.Cells[1].Value.ToString());
-                    var goodPrice = double.Parse(selectedRow.Cells[2].Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture);
-                    var good =
-                        _context.Goods.FirstOrDefault(
-                            good1 => good1.GoodName == goodName && good1.Term == goodTerm && Math.Abs(good1.Price - goodPrice) < 0.000001);
-                    if (good != null)
-                    {
-                        goodsMove = new GoodsMove
+                            goodsMoves.Add(new GoodsMove
+                            {
+                                Good = good,
+                                MoveType = "Buy",
+                                Quantity = quant
+                            });
+                        }
+                        else
                         {
-                            Good = good,
-                            MoveType = "Buy",
-                            Quantity = quantity
-                        };
+                            throw new Exception("Такого товару не існує! Спочатку додайте його в систему!");
+                        }
                     }
-                    else
+                    if (authorStr == null)
                     {
-                        throw new Exception("Такого товару не існує! Спочатку додайте його в систему!");
+                        var term = int.Parse(dataGridView2.Rows[i].Cells[1].Value.ToString());
+                        var goodPrice = double.Parse(dataGridView2.Rows[i].Cells[4].Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture);
+                        var good =
+                       _context.Goods.FirstOrDefault(
+                           good1 => good1.GoodName == goodName && good1.Term == term && Math.Abs(good1.Price - goodPrice) < 0.000001);
+                        if (good != null)
+                        {
+                            goodsMoves.Add(new GoodsMove
+                            {
+                                Good = good,
+                                MoveType = "Buy",
+                                Quantity = quant
+                            });
+                        }
+                        else
+                        {
+                            throw new Exception("Такого товару не існує! Спочатку додайте його в систему!");
+                        }
                     }
                 }
                 if (_individContr != null)
@@ -112,13 +105,12 @@ namespace DBCourseWork.ReDesign
                     {
                         Contractor = _individContr.Contractor,
                         Stuff = stuff,
-                        GoodsMoves = new List<GoodsMove> { goodsMove },
+                        GoodsMoves = goodsMoves,
                         DocDate = DateTime.Now,
                         DocType = _context.DocTypes.First(type => type.Doctype1 == "Buy")
                     };
                     _context.Documentations.Add(documentation);
-                    goodsMove.Documentation = documentation;
-                    _context.GoodsMoves.Add(goodsMove);
+                    _context.GoodsMoves.AddRange(goodsMoves);
                     MessageBox.Show(@"Дані були успішно збережені!");
                     Utilities.ClearSpace(this);
                 }
@@ -128,13 +120,12 @@ namespace DBCourseWork.ReDesign
                     {
                         Contractor = _entityContr.Contractor,
                         Stuff = stuff,
-                        GoodsMoves = new List<GoodsMove> { goodsMove },
+                        GoodsMoves = goodsMoves,
                         DocDate = DateTime.Now,
                         DocType = _context.DocTypes.First(type => type.Doctype1 == "Buy")
                     };
                     _context.Documentations.Add(documentation);
-                    goodsMove.Documentation = documentation;
-                    _context.GoodsMoves.Add(goodsMove);
+                    _context.GoodsMoves.AddRange(goodsMoves);
                     _context.SaveChanges();
                     MessageBox.Show(@"Дані були успішно збережені!");
                     Utilities.ClearSpace(this);
@@ -143,6 +134,8 @@ namespace DBCourseWork.ReDesign
                 {
                     throw new Exception("Такого контрагента не існує!");
                 }
+                dataGridView2.Rows.Clear();
+                dataGridView2.Refresh();
             }
             catch (Exception ex)
             {
@@ -171,6 +164,68 @@ namespace DBCourseWork.ReDesign
             if (otherRadio.Checked)
             {
                 dataGridView1.DataSource = _goods;
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var form = new AddItemForm(_context, _userRole);
+            form.ShowDialog();
+            _books = _context.Books.Select(book => new { book.Name, book.Author, book.Year, ISBN = book.Isbn }).ToList();
+            _goods = _context.Goods.Select(good => new { good.GoodName, good.Term, good.Price }).Where(arg => arg.GoodName != "Book").ToList();
+            if (bookRadio.Checked)
+            {
+                dataGridView1.DataSource = _books;
+            }
+            if (otherRadio.Checked)
+            {
+                dataGridView1.DataSource = _goods;
+            }
+            dataGridView2.Update();
+            dataGridView2.Refresh();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int quantity;
+                var result = int.TryParse(quantityTxt.Text, out quantity);
+                if (!result)
+                {
+                    throw new Exception("Перевірте правильність введеної кількості!");
+                }
+                if (quantity <= 0)
+                {
+                    throw new Exception("Перевірте правильність введеної кількості!");
+                }
+                var selectedRow = dataGridView1.SelectedRows[0];
+                if (selectedRow == null)
+                {
+                    throw new Exception("Оберіть товар!");
+                }
+                if (bookRadio.Checked)
+                {
+                    var bookNameStr = selectedRow.Cells[0].Value.ToString();
+                    var author = selectedRow.Cells[1].Value.ToString();
+                    dataGridView2.Rows.Add("Книга", null, author, bookNameStr, null, quantity);
+                    dataGridView2.Update();
+                    dataGridView2.Refresh();
+                }
+                if (otherRadio.Checked)
+                {
+                    var goodName = selectedRow.Cells[0].Value.ToString();
+                    var goodTerm1 = int.Parse(selectedRow.Cells[1].Value.ToString());
+                    var goodPrice = double.Parse(selectedRow.Cells[2].Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture);
+                    dataGridView2.Rows.Add(goodName, goodTerm1, null, null, goodPrice, quantity);
+                    dataGridView2.Update();
+                    dataGridView2.Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                Utilities.ClearSpace(this);
+                MessageBox.Show(ex.Message);
             }
         }
     }

@@ -87,6 +87,21 @@ namespace DBCourseWork.ReDesign
             }
         }
 
+
+        public void RemoveText(object sender, EventArgs e)
+        {
+            if (phoneTxt.Text == @"Приклад: +38(067)2256943")
+            {
+                phoneTxt.Text = "";
+            }
+        }
+
+        public void AddText(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(phoneTxt.Text))
+                phoneTxt.Text = @"Приклад: +38(067)2256943";
+        }
+
         private void addBtn_Click(object sender, EventArgs e)
         {
             try
@@ -555,6 +570,14 @@ namespace DBCourseWork.ReDesign
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in this.dataGridView2.SelectedRows)
+            {
+                dataGridView2.Rows.RemoveAt(item.Index);
             }
         }
     }

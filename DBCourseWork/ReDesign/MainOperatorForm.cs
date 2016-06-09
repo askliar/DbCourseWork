@@ -291,6 +291,8 @@ namespace DBCourseWork.ReDesign
                 Utilities.ClearSpace(this);
                 quantityTxt.Text = 1.ToString();
                 MessageBox.Show(ex.Message);
+                dataGridView2.Rows.Clear();
+                dataGridView2.Refresh();
             }
         }
 
@@ -348,6 +350,14 @@ namespace DBCourseWork.ReDesign
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in this.dataGridView2.SelectedRows)
+            {
+                dataGridView2.Rows.RemoveAt(item.Index);
             }
         }
     }

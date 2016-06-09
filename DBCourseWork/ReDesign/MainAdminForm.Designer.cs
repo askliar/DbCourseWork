@@ -71,6 +71,7 @@ namespace DBCourseWork.ReDesign
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tab1 = new System.Windows.Forms.TabControl();
+            this.button8 = new System.Windows.Forms.Button();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -82,6 +83,7 @@ namespace DBCourseWork.ReDesign
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button8);
             this.tabPage2.Controls.Add(this.dataGridView3);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.quantityTxt);
@@ -148,10 +150,11 @@ namespace DBCourseWork.ReDesign
             this.GoodName,
             this.quantity,
             this.contractor});
-            this.dataGridView2.Location = new System.Drawing.Point(675, 78);
+            this.dataGridView2.Location = new System.Drawing.Point(675, 92);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(535, 270);
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(535, 256);
             this.dataGridView2.TabIndex = 18;
             // 
             // IdGood
@@ -394,6 +397,9 @@ namespace DBCourseWork.ReDesign
             this.phoneTxt.Name = "phoneTxt";
             this.phoneTxt.Size = new System.Drawing.Size(249, 20);
             this.phoneTxt.TabIndex = 61;
+            this.phoneTxt.Text = "Приклад: +38(067)2256943";
+            this.phoneTxt.Enter += new System.EventHandler(this.RemoveText);
+            this.phoneTxt.Leave += new System.EventHandler(this.AddText);
             // 
             // nameTxt
             // 
@@ -478,6 +484,16 @@ namespace DBCourseWork.ReDesign
             this.tab1.TabIndex = 53;
             this.tab1.SelectedIndexChanged += new System.EventHandler(this.tab1_SelectedIndexChanged);
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(675, 63);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(535, 23);
+            this.button8.TabIndex = 49;
+            this.button8.Text = "Видалити обраний товар з корзини";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // MainAdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -542,5 +558,6 @@ namespace DBCourseWork.ReDesign
         private DataGridView dataGridView3;
         private Button button7;
         private DataGridViewTextBoxColumn contractor;
+        private Button button8;
     }
 }
